@@ -1,0 +1,7 @@
+# Veri depoya konmaz - README'deki Mendeley baglantisindan iner
+dental_rtg_test/
+*.zip
+*.png.orig
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
