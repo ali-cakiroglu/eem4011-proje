@@ -108,3 +108,5 @@ Veri setinin E0 / E1–E4 / N1–N3 adlandırması, işaretleyicilerin deneyim d
 | `grafik.py`, `sekil.py` | Şekilleri üreten betikler |
 | `sonuclar.json` | Ölçülen bütün sayılar |
 | `LICENSE` | MIT kod lisansı |
+| `ekran_goruntusu1.png` | Defter Colab'da çalışırken: örnek röntgen şekli |
+| `ekran_goruntusu2.png` | Defter Colab'da çalışırken: duyarlılık grafiği |
