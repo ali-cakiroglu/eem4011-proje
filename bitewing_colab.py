@@ -32,24 +32,43 @@ bitewing_colab.ipynb defterinin duz Python hali.
 # Veri depoya konulmaz, her çalıştırmada Mendeley'den iner (~75 MB).
 # ----------------------------------------------------------------------
 
-import hashlib, pathlib, urllib.request, zipfile
+import hashlib, pathlib, subprocess, urllib.request
 
 URL = ("https://data.mendeley.com/public-files/datasets/4fbdxs7s7w/"
        "files/66498986-c8ec-4285-9eb7-4f56f65463c6/file_downloaded")
 SHA256 = "3bbe54645aab48252edd53f32729df6e8e6509c20781fd30cabdfb3e6ec9ca78"
+BOYUT = 79048142
 ZIP = pathlib.Path("dental_rtg_test.zip")
 
-if not ZIP.exists():
-    print("indiriliyor...")
-    urllib.request.urlretrieve(URL, ZIP)
+
+def inmis():
+    return ZIP.exists() and ZIP.stat().st_size == BOYUT
+
+
+# DIKKAT: Mendeley, Python'un varsayilan User-Agent'ini ("Python-urllib/3.x")
+# 403 Forbidden ile reddediyor. Tarayici kimligi vermek gerekiyor.
+if not inmis():
+    print("indiriliyor (wget)...")
+    subprocess.run(["wget", "-q", "--user-agent=Mozilla/5.0", "-O", str(ZIP), URL])
+if not inmis():
+    print("indiriliyor (urllib, yedek yol)...")
+    istek = urllib.request.Request(URL, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(istek) as kaynak, open(ZIP, "wb") as hedef:
+        hedef.write(kaynak.read())
 
 ozet = hashlib.sha256(ZIP.read_bytes()).hexdigest()
 print("SHA-256 dogru" if ozet == SHA256 else f"UYARI: ozet uyusmuyor ({ozet})")
 
-if not pathlib.Path("dental_rtg_test/images").exists():
-    with zipfile.ZipFile(ZIP) as z:
-        z.extractall(".")
-print(sum(1 for _ in pathlib.Path("dental_rtg_test/images").iterdir()), "goruntu")
+subprocess.run('unzip -oq dental_rtg_test.zip', shell=True)
+subprocess.run('ls -l dental_rtg_test.zip', shell=True)
+
+import pathlib
+import numpy, scipy, skimage
+
+print("numpy       ", numpy.__version__)
+print("scipy       ", scipy.__version__)
+print("scikit-image", skimage.__version__)
+print("goruntu     ", len(list(pathlib.Path("dental_rtg_test/images").glob("*.png"))))
 
 
 # ----------------------------------------------------------------------
