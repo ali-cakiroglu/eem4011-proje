@@ -21,6 +21,8 @@ https://data.mendeley.com/datasets/4fbdxs7s7w/1 · DOI: 10.17632/4fbdxs7s7w.1 ·
 
 Ek kurulum gerekmez: yalnız `numpy`, `Pillow` ve `matplotlib` kullanılır, üçü de Colab'da hazır gelir. Toplam süre yaklaşık 5 dakika.
 
+> Depodaki defter Colab'da baştan sona (**Tümünü çalıştır**) hatasız çalıştırılarak doğrulanmıştır; ürettiği iki şekil, yerelde ölçülen sonuçlarla birebir aynıdır.
+
 ## Yöntem
 
 Dört aşama, hiçbiri veriden öğrenmez:
