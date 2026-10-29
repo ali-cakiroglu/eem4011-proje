@@ -40,6 +40,12 @@ Parametreler (ortalama filtre penceresi, medyan penceresi, adaylar arası en az 
 
 ## Şekiller
 
+### `sekil_akis.png`
+
+Yöntemin akışı (Şekil 1). Örnek röntgen (02.png) dört aşamadan geçiyor; her panelde o aşamanın skor haritası, kendi seçtiği 10 aday (mavi `+`) ve E0 kutuları (sarı: yakalandı, kırmızı: kaçırıldı) görülüyor. A0'ın adaylarının siyah banda, A1'inkilerin diş kenarına gittiği burada gözle görülüyor. Son panel ölçüm kuralını ve test sonuçlarını özetliyor.
+
+> **Veri:** Kybic, Tichý, Kunt, Mendeley Data, DOI: 10.17632/4fbdxs7s7w.1, CC BY-NC 3.0.
+
 ### `sekil1_02.png`
 
 Örnek röntgen (02.png). Sarı kutu: E0'ın işaretlediği ve yöntemin bulduğu lezyon. Kırmızı kutu: E0'ın işaretlediği ama yöntemin kaçırdığı lezyon. Mavi `+`: yöntemin seçtiği 10 aday, seçilme sırasıyla numaralı. Başlıktaki sayı: bu görüntüde kaç E0 kutusunun bulunduğu / toplam kaç E0 kutusu olduğu.
@@ -107,7 +113,7 @@ Veri setinin E0 / E1–E4 / N1–N3 adlandırması, işaretleyicilerin deneyim d
 | `bitewing_colab.py` | Defterin düz Python hali |
 | `bitewing.py` | Modül: veri okuma, temel işlemler, aşamalar, ölçüm |
 | `calistir.py` | Parametre taraması ve nihai ölçüm |
-| `grafik.py`, `sekil.py` | Şekilleri üreten betikler |
+| `grafik.py`, `sekil.py`, `akis.py` | Şekilleri üreten betikler |
 | `sonuclar.json` | Ölçülen bütün sayılar |
 | `LICENSE` | MIT kod lisansı |
 | `ekran_goruntusu1.png` | Defter Colab'da çalışırken: örnek röntgen şekli |
