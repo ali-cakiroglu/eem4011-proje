@@ -72,6 +72,8 @@ Duyarlılık–aday sayısı eğrisi. Dört aşama ve rastgele alt sınır eğri
 
 A3, rastgele işaretlemenin **3,2 katı**. Aynı kuralla ölçüldüğünde 7 hekim, görüntü başına 2,5–4,3 işaretle 0,74–0,91 duyarlılık alıyor; yöntem bu düzeye ancak görüntü başına 150–200 adayla ulaşıyor.
 
+Görüntü başına yanlış aday (YP/görüntü, 80 test görüntüsü): **9,53**. Test bölümünün 20'şer görüntülük parçalarında Duyarlılık@10: 21–40 **0,189** · 41–60 **0,140** · 61–80 **0,167** · 81–100 **0,233** (defterin 10. bölümü).
+
 ## Sağlamalar
 
 Defter çalıştığında şu üç sayı tutmalı; tutmuyorsa veri ya da okuma hatalıdır:
@@ -90,7 +92,7 @@ Ayrıca veri `01–100.png` adıyla, 1068×847 boyutunda ve sekiz işaretleyiciy
 
 - **Eğitim verisi gerekmez.** Yöntemin hiçbir aşaması veriden öğrenmez; ağırlık, model dosyası ya da etiketli eğitim kümesi yoktur. Etiketler yalnız ölçüm için kullanılır.
 - **GPU gerekmez.** Tamamı CPU'da çalışır.
-- **Görüntü başına süre:** CPU'da ortalama **226 ms** (medyan 168 ms, aralık 149–379 ms; A3 boru hattı + 10 aday seçimi, görüntü okuma hariç). 100 görüntü yaklaşık 23 saniye.
+- **Görüntü başına süre:** Colab'da CPU ile ortalama **154 ms** (medyan 153 ms; A3 boru hattı + 10 aday seçimi, görüntü okuma hariç). 100 görüntü yaklaşık 15 saniye.
 - Üç parametre (ortalama filtre penceresi, medyan penceresi, adaylar arası en az mesafe) dışında ayar yoktur.
 
 ## Kaynaklar

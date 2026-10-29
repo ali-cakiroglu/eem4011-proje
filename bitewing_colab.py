@@ -395,3 +395,41 @@ ax.set_xlabel("Goruntu basina isaret sayisi")
 ax.set_ylabel("Duyarlilik (E0 kutularinin bulunan orani)")
 ax.set_xlim(0, K + 0.6); ax.set_ylim(0, 1.0); ax.grid(alpha=0.25); ax.legend(fontsize=9)
 fig.tight_layout(); fig.savefig("grafik.png", dpi=160); plt.show()
+
+# ----------------------------------------------------------------------
+# ## 10. Ek ölçümler
+# 
+# A3 için yanlış aday sayısı (YP/görüntü), sonucun test bölümünün 20'şer görüntülük parçalarında tekrarı ve CPU'da görüntü başına süre. İlk satır sağlamadır: ana sonucu (Duyarlılık@10) yeniden üretmelidir.
+# ----------------------------------------------------------------------
+
+# Ek ölçümler (A3, test bölümü): YP/görüntü, parçalara göre tekrar, CPU süresi
+import time
+
+kullanilan = [d for d in SONUC if kutular.get((d, REFERANS))]   # gS ile aynı sıra
+mesafe = secim["A3"]["mesafe"]
+
+eslesen = []
+for skor, maske, e0 in zip(skorS, maskeS, e0S):
+    eslesen.append(int(profil(adaylar(skor, K, mesafe, maske), e0, K)[-1]))
+
+toplam_kutu = sum(len(e) for e in e0S)
+print(f"Sağlama — Duyarlılık@10: {sum(eslesen)}/{toplam_kutu} = {sum(eslesen) / toplam_kutu:.3f}")
+
+# E0 kutusu olmayan test görüntülerinde 10 adayın hepsi yanlış pozitiftir
+bos = len(SONUC) - len(kullanilan)
+yp = sum(K - m for m in eslesen) + bos * K
+print(f"YP/görüntü ({len(SONUC)} test görüntüsü): {yp / len(SONUC):.2f}")
+
+print("\nParçalara göre Duyarlılık@10:")
+for bas in (21, 41, 61, 81):
+    parca = {f"{i:02d}.png" for i in range(bas, bas + 20)}
+    b = sum(m for d, m in zip(kullanilan, eslesen) if d in parca)
+    h = sum(len(e) for d, e in zip(kullanilan, e0S) if d in parca)
+    print(f"  {bas:>3}-{bas + 19:<3}  {b:>2}/{h:<3} = {b / h:.3f}")
+
+sure = []
+for g in gS[:20]:
+    t = time.perf_counter()
+    adaylar(skor_a2(g, pencere, medyan), K, mesafe, dis_maskesi(g))
+    sure.append((time.perf_counter() - t) * 1000)
+print(f"\nCPU'da görüntü başına ortalama {np.mean(sure):.0f} ms (medyan {np.median(sure):.0f} ms)")
